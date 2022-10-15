@@ -21,7 +21,7 @@ public class CartItem {
         if (drink != null)
             return drink.getPrice().add(getToppingsAmount()).multiply(BigDecimal.valueOf(quantity));
         else
-            throw new CartItemException("There is no drink in this cart item.");
+            throw new CartItemException("There is no drink in the cart item: "+ id);
     }
 
     BigDecimal getToppingsAmount() {

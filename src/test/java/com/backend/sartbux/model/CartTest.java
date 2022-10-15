@@ -19,7 +19,7 @@ public class CartTest {
     }
 
     @Test
-    @DisplayName("All cart items should contain at least one drink to get total amount")
+    @DisplayName("All cart items should contain at least one drink to get total amount of a cart")
     public void getCartAmount_cartWithCartItemsOneCartItemHasNoDrink_throwException(){
         Cart cart = createCartWithCartItemListOneCartItemHasNoDrink();
         Assertions.assertThrows(CartItemException.class, cart::getCartAmount);
