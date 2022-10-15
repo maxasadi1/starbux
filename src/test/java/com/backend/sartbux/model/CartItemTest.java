@@ -45,24 +45,35 @@ public class CartItemTest {
     }
 
     private CartItem createCartItemDrinkAndTopping(){
-        Product product = new Product("1", "Black Coffee" , BigDecimal.valueOf(4), ProductType.DRINK);
-        Product topping = new Product("1", "Milk" , BigDecimal.valueOf(2), ProductType.DRINK);
-        return new CartItem("1", product, List.of(topping) ,1);
+        Product drink = createDrinkBlackCoffee();
+        Product topping = createToppingMilk();
+        return new CartItem("1", drink, List.of(topping) ,1);
     }
 
     private CartItem createCartItemDrinkWithoutTopping(){
-        Product product = new Product("1", "Black Coffee" , BigDecimal.valueOf(4), ProductType.DRINK);
-        return new CartItem("1", product, null,1);
+        Product drink = createDrinkBlackCoffee();
+        return new CartItem("1", drink, null,1);
     }
     private CartItem createCartItemWithToppingWithoutDrink(){
-        Product topping = new Product("1", "Milk" , BigDecimal.valueOf(2), ProductType.DRINK);
+        Product topping = createToppingMilk();
         return new CartItem("1", null, List.of(topping),1);
     }
 
     private CartItem createCartItemWithDrinkAndTwoToppings(){
-        Product product = new Product("1", "Black Coffee" , BigDecimal.valueOf(4), ProductType.DRINK);
-        Product toppingMilk = new Product("1", "Milk" , BigDecimal.valueOf(2), ProductType.DRINK);
-        Product toppingHazelnutSyrup = new Product("2", "Hazelnut syrup" , BigDecimal.valueOf(3), ProductType.DRINK);
-        return new CartItem("1", product, List.of(toppingMilk, toppingHazelnutSyrup) ,1);
+        Product drink = createDrinkBlackCoffee();
+        Product toppingMilk = createToppingMilk();
+        Product toppingHazelnutSyrup = createToppingHazelnutSyrup();
+        return new CartItem("1", drink, List.of(toppingMilk, toppingHazelnutSyrup) ,1);
+    }
+
+    private Product createDrinkBlackCoffee(){
+        return new Product("1", "Black Coffee" , BigDecimal.valueOf(4), ProductType.DRINK);
+    }
+
+    private Product createToppingMilk(){
+        return new Product("1", "Milk" , BigDecimal.valueOf(2), ProductType.DRINK);
+    }
+    private Product createToppingHazelnutSyrup(){
+        return new Product("2", "Hazelnut syrup" , BigDecimal.valueOf(3), ProductType.DRINK);
     }
 }

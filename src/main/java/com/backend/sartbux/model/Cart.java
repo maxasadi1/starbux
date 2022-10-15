@@ -13,7 +13,7 @@ import java.util.List;
 public class Cart {
     String id;
     List<CartItem> cartItems;
-    BigDecimal cartAmount;
+    private BigDecimal cartAmount;
 
     public BigDecimal getCartAmount() {
         return cartItems.stream().map(CartItem::getItemAmount).reduce(BigDecimal.ZERO, BigDecimal::add);
