@@ -1,24 +1,33 @@
 package com.backend.sartbux.model;
 
+import com.backend.sartbux.exception.CartItemException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.util.Optional;
+import java.util.List;
 
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 public class CartItem {
     String id;
     Product drink;
-    Product topping;
+    List<Product> toppings;
     int quantity;
-    private BigDecimal itemAmount;
 
-    //TODO How to check if the topping is not null , Can we use Optional as field?
-    public BigDecimal getItemAmount() {
-        itemAmount = drink.getPrice().multiply(topping.getPrice()).multiply(BigDecimal.valueOf(quantity));
-        return itemAmount;
+    public BigDecimal getItemAmount() throws CartItemException {
+        if (drink != null)
+            return drink.getPrice().add(getToppingsAmount()).multiply(BigDecimal.valueOf(quantity));
+        else
+            throw new CartItemException("There is no drink in this cart item.");
+    }
+
+    BigDecimal getToppingsAmount() {
+        if (toppings == null || toppings.isEmpty())
+            return BigDecimal.valueOf(0);
+        else
+            return toppings.stream().map(Product::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }

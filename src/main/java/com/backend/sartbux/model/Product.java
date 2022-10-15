@@ -3,9 +3,11 @@ package com.backend.sartbux.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
 
+@NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class Product {
@@ -13,10 +15,6 @@ public class Product {
     String name;
     BigDecimal price;
     ProductType productType;
-
-    public Product(ProductType productType) {
-        this.productType = productType;
-    }
 }
 
 

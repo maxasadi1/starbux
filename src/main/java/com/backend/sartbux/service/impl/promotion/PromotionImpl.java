@@ -10,6 +10,10 @@ public class PromotionImpl implements PromotionService {
 
     @Override
     public Optional<Promotion> checkPromotion(Cart cart) {
+        //TODO cart size > 3
+
+        //TODO total cart amount >=12 
+
         return Optional.empty();
     }
 }
