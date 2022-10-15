@@ -13,14 +13,14 @@ public class CartItemTest {
     @DisplayName("Total Amount of a cart item with a drink and a topping")
     public void getItemAmount_cartItemWithDrinkWithTopping_amount(){
         CartItem cartItem = createCartItemDrinkAndTopping();
-        Assertions.assertEquals(cartItem.getItemAmount(), BigDecimal.valueOf(6));
+        Assertions.assertEquals( BigDecimal.valueOf(6), cartItem.getItemAmount());
     }
 
     @Test
     @DisplayName("Total Amount of a cart item with a drink and without any topping")
     public void getItemAmount_cartItemWithDrinkWithoutTopping_amount(){
         CartItem cartItem = createCartItemDrinkWithoutTopping();
-        Assertions.assertEquals(cartItem.getItemAmount(), BigDecimal.valueOf(4));
+        Assertions.assertEquals(BigDecimal.valueOf(4), cartItem.getItemAmount());
     }
 
     @Test
@@ -34,14 +34,14 @@ public class CartItemTest {
     @DisplayName("Total amount of a topping list in a cart item")
     public void getToppingsAmount_cartItemWithDrinkWithTwoTopping_amount(){
         CartItem cartItem = createCartItemWithDrinkAndTwoToppings();
-        Assertions.assertEquals(cartItem.getToppingsAmount(), BigDecimal.valueOf(5));
+        Assertions.assertEquals(BigDecimal.valueOf(5), cartItem.getToppingsAmount());
     }
 
     @Test
     @DisplayName("Total amount of toppings when there is no topping in a cart item")
     public void getToppingsAmount_cartItemWithNoTopping_amount(){
         CartItem cartItem = createCartItemDrinkWithoutTopping();
-        Assertions.assertEquals(cartItem.getToppingsAmount(), BigDecimal.valueOf(0));
+        Assertions.assertEquals(BigDecimal.valueOf(0), cartItem.getToppingsAmount());
     }
 
     private CartItem createCartItemDrinkAndTopping(){

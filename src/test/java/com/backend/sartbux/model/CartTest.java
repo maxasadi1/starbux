@@ -13,7 +13,7 @@ public class CartTest {
     @DisplayName("Total amount of cart items in a cart")
     public void getCartAmount_cartWithCartItemListIncludesDrinksAndToppings_amount(){
         Cart cart = createCartWithCartItemListIncludesDrinksAndToppings();
-        Assertions.assertEquals(cart.getCartAmount(), BigDecimal.valueOf(32));
+        Assertions.assertEquals(BigDecimal.valueOf(32), cart.getCartAmount());
     }
 
     @Test
