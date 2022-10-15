@@ -1,47 +1,48 @@
 package com.backend.sartbux.model;
 
 import com.backend.sartbux.exception.CartItemException;
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.util.List;
 
 public class CartItemTest {
+    CartItem cartItem;
 
     @Test
     @DisplayName("Total Amount of a cart item with a drink and a topping")
     public void getItemAmount_cartItemWithDrinkWithTopping_amount(){
-        CartItem cartItem = createCartItemDrinkAndTopping();
-        Assertions.assertEquals( BigDecimal.valueOf(6), cartItem.getItemAmount());
+        cartItem = createCartItemDrinkAndTopping();
+        assertEquals( BigDecimal.valueOf(6), cartItem.getItemAmount());
     }
 
     @Test
     @DisplayName("Total Amount of a cart item with a drink and without any topping")
     public void getItemAmount_cartItemWithDrinkWithoutTopping_amount(){
-        CartItem cartItem = createCartItemDrinkWithoutTopping();
-        Assertions.assertEquals(BigDecimal.valueOf(4), cartItem.getItemAmount());
+        cartItem = createCartItemDrinkWithoutTopping();
+        assertEquals(BigDecimal.valueOf(4), cartItem.getItemAmount());
     }
 
     @Test
     @DisplayName("Cart item should contains at least one drink in order to get total amount")
     public void getItemAmount_cartItemWithToppingWithoutDrink_throwException(){
-        CartItem cartItem = createCartItemWithToppingWithoutDrink();
-        Assertions.assertThrows(CartItemException.class, cartItem::getItemAmount);
+        cartItem = createCartItemWithToppingWithoutDrink();
+        assertThrows(CartItemException.class, cartItem::getItemAmount);
     }
 
     @Test
     @DisplayName("Total amount of a topping list in a cart item")
     public void getToppingsAmount_cartItemWithDrinkWithTwoTopping_amount(){
-        CartItem cartItem = createCartItemWithDrinkAndTwoToppings();
-        Assertions.assertEquals(BigDecimal.valueOf(5), cartItem.getToppingsAmount());
+        cartItem = createCartItemWithDrinkAndTwoToppings();
+        assertEquals(BigDecimal.valueOf(5), cartItem.getToppingsAmount());
     }
 
     @Test
     @DisplayName("Total amount of toppings when there is no topping in a cart item")
     public void getToppingsAmount_cartItemWithNoTopping_amount(){
-        CartItem cartItem = createCartItemDrinkWithoutTopping();
-        Assertions.assertEquals(BigDecimal.valueOf(0), cartItem.getToppingsAmount());
+        cartItem = createCartItemDrinkWithoutTopping();
+        assertEquals(BigDecimal.valueOf(0), cartItem.getToppingsAmount());
     }
 
     private CartItem createCartItemDrinkAndTopping(){

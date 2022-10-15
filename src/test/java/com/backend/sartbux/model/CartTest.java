@@ -1,26 +1,27 @@
 package com.backend.sartbux.model;
 
 import com.backend.sartbux.exception.CartItemException;
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.util.List;
 
 public class CartTest {
+    Cart cart;
 
     @Test
     @DisplayName("Total amount of cart items in a cart")
     public void getCartAmount_cartWithCartItemListIncludesDrinksAndToppings_amount(){
-        Cart cart = createCartWithCartItemListIncludesDrinksAndToppings();
-        Assertions.assertEquals(BigDecimal.valueOf(32), cart.getCartAmount());
+        cart = createCartWithCartItemListIncludesDrinksAndToppings();
+        assertEquals(BigDecimal.valueOf(32), cart.getCartAmount());
     }
 
     @Test
     @DisplayName("All cart items should contain at least one drink to get total amount of a cart")
     public void getCartAmount_cartWithCartItemsOneCartItemHasNoDrink_throwException(){
-        Cart cart = createCartWithCartItemListOneCartItemHasNoDrink();
-        Assertions.assertThrows(CartItemException.class, cart::getCartAmount);
+        cart = createCartWithCartItemListOneCartItemHasNoDrink();
+        assertThrows(CartItemException.class, cart::getCartAmount);
     }
 
     private Cart createCartWithCartItemListIncludesDrinksAndToppings(){
