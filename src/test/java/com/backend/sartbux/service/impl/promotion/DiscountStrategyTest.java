@@ -1,6 +1,8 @@
 package com.backend.sartbux.service.impl.promotion;
 
 import com.backend.sartbux.model.*;
+import com.backend.sartbux.model.enums.ProductType;
+import com.backend.sartbux.model.enums.PromotionType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,9 +19,9 @@ public class DiscountStrategyTest {
     @Test
     @DisplayName("Calculate promotion the cart which its total amount is more than the discount threshold")
     public void calculatePromotion_givenCart_returnOptionalPromotion(){
-        DiscountStrategy discountStrategy = new DiscountStrategy();
         Cart cart = createCartWithTotalAmountMoreThanDiscountThreshold();
-        Optional<Promotion> promotion = discountStrategy.calculatePromotion(cart);
+        DiscountStrategy discountStrategy = new DiscountStrategy(cart);
+        Optional<Promotion> promotion = discountStrategy.calculatePromotion();
         assumeTrue(promotion.isPresent());
         promotion.ifPresent(value -> assertEquals(PromotionType.DISCOUNT, value.getPromotionType()));
         promotion.ifPresent(value -> assertEquals(BigDecimal.valueOf(8), value.getPromotionAmount()));
@@ -28,9 +30,9 @@ public class DiscountStrategyTest {
     @Test
     @DisplayName("Check the cart which its total amount is less than the discount threshold and return empty promotion")
     public void calculatePromotion_givenCart_returnEmptyPromotion(){
-        DiscountStrategy discountStrategy = new DiscountStrategy();
         Cart cart = createCartWithTotalAmountLessThanDiscountThreshold();
-        Optional<Promotion> promotion = discountStrategy.calculatePromotion(cart);
+        DiscountStrategy discountStrategy = new DiscountStrategy(cart);
+        Optional<Promotion> promotion = discountStrategy.calculatePromotion();
         assertFalse(promotion.isPresent());
     }
 

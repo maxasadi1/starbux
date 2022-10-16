@@ -2,11 +2,12 @@ package com.backend.sartbux.model;
 
 import com.backend.sartbux.exception.CartItemException;
 import static org.junit.jupiter.api.Assertions.*;
+
+import com.backend.sartbux.model.enums.ProductType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class CartItemTest {

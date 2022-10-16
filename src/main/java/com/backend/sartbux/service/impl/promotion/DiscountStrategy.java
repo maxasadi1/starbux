@@ -2,16 +2,21 @@ package com.backend.sartbux.service.impl.promotion;
 
 import com.backend.sartbux.model.Cart;
 import com.backend.sartbux.model.Promotion;
-import com.backend.sartbux.model.PromotionType;
+import com.backend.sartbux.model.enums.PromotionType;
 
-import javax.swing.text.html.Option;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Optional;
 
 public class DiscountStrategy implements PromotionStrategy{
+    private final Cart cart;
+
+    public DiscountStrategy(Cart cart) {
+        this.cart = cart;
+    }
+
     @Override
-    public Optional<Promotion> calculatePromotion(Cart cart) {
+    public Optional<Promotion> calculatePromotion() {
         BigDecimal cartAmount = cart.getCartAmount();
         switch (cartAmount.compareTo(BigDecimal.valueOf(12))){
             case 0:

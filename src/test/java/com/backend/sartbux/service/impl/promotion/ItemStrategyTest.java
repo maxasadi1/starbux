@@ -1,6 +1,8 @@
 package com.backend.sartbux.service.impl.promotion;
 
 import com.backend.sartbux.model.*;
+import com.backend.sartbux.model.enums.ProductType;
+import com.backend.sartbux.model.enums.PromotionType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,9 +19,9 @@ public class ItemStrategyTest {
     @Test
     @DisplayName("Calculate promotion of the cart which its item number is more than the promotion threshold")
     public void calculatePromotion_givenCart_returnOptionalPromotion(){
-        ItemStrategy itemStrategy = new ItemStrategy();
         Cart cart = createCartWithItemsMoreThanPromotionThreshold();
-        Optional<Promotion> promotion = itemStrategy.calculatePromotion(cart);
+        ItemStrategy itemStrategy = new ItemStrategy(cart);
+        Optional<Promotion> promotion = itemStrategy.calculatePromotion();
         assumeTrue(promotion.isPresent());
         promotion.ifPresent(value -> assertEquals(PromotionType.ITEM, value.getPromotionType()));
         promotion.ifPresent(value -> assertEquals(BigDecimal.valueOf(6), value.getPromotionAmount()));
@@ -28,26 +30,26 @@ public class ItemStrategyTest {
     @Test
     @DisplayName("Check the cart which its item number is less than the promotion threshold and return empty promotion")
     public void calculatePromotion_givenCart_returnEmptyPromotion(){
-        ItemStrategy itemStrategy = new ItemStrategy();
         Cart cart = createCartWithItemsLessThanPromotionThreshold();
-        Optional<Promotion> promotion = itemStrategy.calculatePromotion(cart);
+        ItemStrategy itemStrategy = new ItemStrategy(cart);
+        Optional<Promotion> promotion = itemStrategy.calculatePromotion();
         assertFalse(promotion.isPresent());
     }
 
     @Test
     @DisplayName("Find the cheapest drink with its topping")
     public void getCheapestDrinkWithItsToppingAmount_givenCart_returnAmount(){
-        ItemStrategy itemStrategy = new ItemStrategy();
         Cart cart = createCartWithItemsMoreThanPromotionThreshold();
-        assertEquals(BigDecimal.valueOf(6), itemStrategy.getCheapestDrinkWithItsToppingAmount(cart));
+        ItemStrategy itemStrategy = new ItemStrategy(cart);
+        assertEquals(BigDecimal.valueOf(6), itemStrategy.getCheapestDrinkWithItsToppingAmount());
     }
 
     @Test
     @DisplayName("Count the total number of drinks in a cart")
     public void getTotalCartItemsQuantity_givenCart_returnDrinkCount(){
-        ItemStrategy itemStrategy = new ItemStrategy();
         Cart cart = createCartWithItemsMoreThanPromotionThreshold();
-        assertEquals(4, itemStrategy.getTotalCartItemsQuantity(cart));
+        ItemStrategy itemStrategy = new ItemStrategy(cart);
+        assertEquals(4, itemStrategy.getTotalCartItemsQuantity());
     }
 
 

@@ -1,7 +1,8 @@
 package com.backend.sartbux.service.impl.promotion;
 
 import com.backend.sartbux.model.*;
-import org.junit.jupiter.api.Assertions;
+import com.backend.sartbux.model.enums.ProductType;
+import com.backend.sartbux.model.enums.PromotionType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
@@ -21,9 +22,9 @@ public class PromotionImplTest {
         Optional<Promotion> promotion =
                 promotionImpl.checkPromotion(createCartWithCartItemListIncludesDrinksAndToppings());
         assumeTrue(promotion.isPresent());
-        Promotion maxPromotion = new Promotion("", BigDecimal.valueOf(8), PromotionType.DISCOUNT);
-        promotion.ifPresent(value -> assertEquals(maxPromotion, value));
+        promotion.ifPresent(value -> assertEquals(BigDecimal.valueOf(8), value.getPromotionAmount()));
     }
+
 
 
     @Test

@@ -1,5 +1,6 @@
 package com.backend.sartbux.model;
 
+import com.backend.sartbux.model.enums.PromotionType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
