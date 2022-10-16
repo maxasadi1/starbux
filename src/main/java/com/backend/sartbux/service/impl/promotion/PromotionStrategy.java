@@ -6,7 +6,6 @@ import com.backend.sartbux.model.Promotion;
 
 import java.util.Optional;
 
-//TODO What should we name the class
-public interface PromotionInterface {
+public interface PromotionStrategy {
     public Optional<Promotion> calculatePromotion(Cart cart);
 }

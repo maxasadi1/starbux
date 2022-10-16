@@ -19,12 +19,12 @@ public class CartItem {
 
     public BigDecimal getItemAmount() throws CartItemException {
         if (drink != null)
-            return drink.getPrice().add(getToppingsAmount()).multiply(BigDecimal.valueOf(quantity));
+            return drink.getPrice().add(getToppingAmount()).multiply(BigDecimal.valueOf(quantity));
         else
             throw new CartItemException("There is no drink in the cart item: "+ id);
     }
 
-    BigDecimal getToppingsAmount() {
+    public BigDecimal getToppingAmount() {
         if (toppings == null || toppings.isEmpty())
             return BigDecimal.valueOf(0);
         else

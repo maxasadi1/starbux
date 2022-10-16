@@ -6,13 +6,15 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class CartItemTest {
     CartItem cartItem;
 
     @Test
     @DisplayName("Total Amount of a cart item with a drink and a topping")
-    public void getItemAmount_cartItemWithDrinkWithTopping_amount(){
+    public void getItemAmount_givenCartItemWithDrinkWithTopping_expectAmount(){
         cartItem = createCartItemDrinkAndTopping();
         assertEquals( BigDecimal.valueOf(6), cartItem.getItemAmount());
     }
@@ -35,16 +37,22 @@ public class CartItemTest {
     @DisplayName("Total amount of a topping list in a cart item")
     public void getToppingsAmount_cartItemWithDrinkWithTwoTopping_amount(){
         cartItem = createCartItemWithDrinkAndTwoToppings();
-        assertEquals(BigDecimal.valueOf(5), cartItem.getToppingsAmount());
+        assertEquals(BigDecimal.valueOf(5), cartItem.getToppingAmount());
     }
 
     @Test
     @DisplayName("Total amount of toppings when there is no topping in a cart item")
     public void getToppingsAmount_cartItemWithNoTopping_amount(){
         cartItem = createCartItemDrinkWithoutTopping();
-        assertEquals(BigDecimal.valueOf(0), cartItem.getToppingsAmount());
+        assertEquals(BigDecimal.valueOf(0), cartItem.getToppingAmount());
     }
 
+    @Test
+    public void getDrinkAmount(){
+        cartItem = createCartItemDrinkWithoutTopping();
+        List<String> toppings = cartItem.getToppings().stream().map(Product::getName).collect(Collectors.toList());
+
+    }
     private CartItem createCartItemDrinkAndTopping(){
         Product drink = createDrinkBlackCoffee();
         Product topping = createToppingMilk();

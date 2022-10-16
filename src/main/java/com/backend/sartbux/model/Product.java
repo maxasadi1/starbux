@@ -16,6 +16,3 @@ public class Product {
     BigDecimal price;
     ProductType productType;
 }
-
-
-;
